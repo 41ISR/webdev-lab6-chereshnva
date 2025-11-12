@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "./SearchPage.css"
+import Dogimages from "../DogImages/Dogimages"
 
 
 const SearchPage = () => {
@@ -7,6 +9,7 @@ const SearchPage = () => {
     const [BreedsShow, setBreedsShow] = useState(undefined)
     const [breeds, setBreeds] = useState(undefined)
     const [error, setError] = useState(undefined)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const handleBreeds = async (e) => {
@@ -35,6 +38,7 @@ const SearchPage = () => {
     
     return(
         <>
+        <div className="breed-cont">
         <h1>Поиск</h1>
                 <input
                     value={BreedsName}
@@ -43,13 +47,14 @@ const SearchPage = () => {
         {BreedsShow && (
                 <div className="breeds-all">
                     {BreedsShow.map((entry) => (
-                      <div className="entry">
-                        <span><b>{entry}</b></span>
+                      <div onClick={() => navigate(`/images/${entry}`)} className="entry">
+                        {entry}
                       </div> 
                     ))
                 }
                 </div>
             )}
+            </div>
         </>
     )
 }
